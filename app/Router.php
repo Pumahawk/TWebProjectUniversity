@@ -19,6 +19,9 @@
 			
 			Router::get("login","App\Controller\UserController::login") -> params($_POST);
 			Router::get("logout","App\Controller\UserController::logout");
+			
+
+			Router::get("error", 'App\View\Error::errorRequestConnection');
 		}
 		
 		public static function get($command, $algorithm){
@@ -29,6 +32,8 @@
 		public static function process($request){
 			if(isset(Router::$requestList[$request]))
 				Router::$requestList[$request] -> process();
+			else
+				Router::$requestList['error'] -> process();
 		}
 
 		public static function helloword(){
