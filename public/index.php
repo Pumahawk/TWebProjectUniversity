@@ -4,6 +4,7 @@ require("../bin/Framework.php");
 
 use Bin\Framework;
 
+Framework::loadPhpFile("../app/Configuration");
 Framework::loadPhpFile("../bin");
 Framework::loadPhpFile("../app");
 Framework::loadPhpFile("../app/Controller");
