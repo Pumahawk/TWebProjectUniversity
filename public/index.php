@@ -2,8 +2,9 @@
 
 require("../bin/Framework.php");
 
-use Framework\Framework;
+use Bin\Framework;
 
+Framework::loadPhpFile("../bin");
 Framework::loadPhpFile("../app");
 Framework::loadPhpFile("../app/Controller");
 Framework::loadPhpFile("../app/Model");
