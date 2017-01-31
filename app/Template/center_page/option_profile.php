@@ -1,1 +1,1 @@
-<?php
+<p class = "text-center notfoundpage"></p>

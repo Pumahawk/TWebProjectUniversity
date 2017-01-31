@@ -23,7 +23,7 @@
 	      <?php require $BASE_PATH_TEMPLATE."navbar.php" ?>
 	      
 	      </nav>
-	      <?php require $BASE_PATH_TEMPLATE.self::$PAGE_TO_OPEN ?>
+	      <?php require $BASE_PATH_TEMPLATE.$this->CENTER_PAGE ?>
 			<footer class="footer">
 	      <?php require $BASE_PATH_TEMPLATE."footer.php" ?>
 		      </footer>
