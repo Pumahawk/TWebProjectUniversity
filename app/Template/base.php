@@ -1,4 +1,7 @@
-<html>
+<?php
+// $PAGE_TO_OPEN must defined
+	$BASE_PATH_TEMPLATE = "../app/Template/";
+?><html>
 	<head>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -7,6 +10,9 @@
 		<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" >
 		
 		<!-- Latest compiled and minified JavaScript -->
+		<link rel="stylesheet" href="css/style.css">
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	</head>
 	<body>
 	
@@ -14,12 +20,12 @@
 	    <!-- Static navbar -->
 	      <nav class="navbar navbar-default">
 	
-	      <?php require "../app/Template/navbar.php" ?>
+	      <?php require $BASE_PATH_TEMPLATE."navbar.php" ?>
 	      
 	      </nav>
-	      <?php require "../app/Template/home_center.php" ?>
+	      <?php require $BASE_PATH_TEMPLATE.self::$PAGE_TO_OPEN ?>
 			<footer class="footer">
-	      <?php require "../app/Template/footer.php" ?>
+	      <?php require $BASE_PATH_TEMPLATE."footer.php" ?>
 		      </footer>
 	    </div> <!-- /container -->
 	

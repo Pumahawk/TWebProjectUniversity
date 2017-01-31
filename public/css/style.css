@@ -1,0 +1,15 @@
+@CHARSET "ISO-8859-1";
+
+
+body{
+	//min-width: 508px;
+}
+
+.notfoundpage{
+	height:430px;
+	padding:80px;
+	background-image: url("../img/404.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
