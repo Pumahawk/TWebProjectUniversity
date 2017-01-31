@@ -8,7 +8,7 @@
 		
 		public static function boot(){
 			Router::get("helloword", 'App\Router::helloword');
-			Router::get("test", 'App\Router::test') -> middleware("logged");
+			Router::get("testview", 'App\View\Test::test');
 			
 			Router::get("/", "App\View\Home::index");
 			Router::get("orders","App\View\Ordini::index");
