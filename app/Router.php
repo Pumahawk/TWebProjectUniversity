@@ -17,7 +17,8 @@
 			Router::get("optionProfile", "App\View\SitePage::optionProfilePage");
 
 			Router::get("logOut", "App\Controller\UserController::logOut");
-			Router::get("logIn", "App\Controller\UserController::logIn") -> params($_POST);
+			Router::get("logIn", "App\Controller\UserController::logIn");
+			
 
 			Router::get("error", 'App\View\Error::errorRequestConnection');
 		}
