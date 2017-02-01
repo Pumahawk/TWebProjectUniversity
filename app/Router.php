@@ -13,7 +13,11 @@
 			Router::get("/", "App\View\SitePage::homePage");
 			Router::get("contact", "App\View\SitePage::contactPage");
 			Router::get("manageProducts", "App\View\SitePage::manageProductsPage");
+			Router::get("manageOrders", "App\View\SitePage::manageOrdersPage");
 			Router::get("optionProfile", "App\View\SitePage::optionProfilePage");
+
+			Router::get("logOut", "App\Controller\UserController::logOut");
+			Router::get("logIn", "App\Controller\UserController::logIn") -> params($_POST);
 
 			Router::get("error", 'App\View\Error::errorRequestConnection');
 		}
