@@ -3,9 +3,19 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="titleProduct"></h4>
+        <h4 class="modal-title" id="titleProduct">Carrello</h4>
       </div>
       <div class="modal-body" id = "listProductCart">
+      	 <div class="list-group text-center">
+      	 <?php for($i=0; $i<10; $i++):?>
+		  <a class="list-group-item" data-toggle="collapse" data-target="#collapseExample<?= $i?>">Titolo Prodotto</a>
+		  <div class="collapse" id="collapseExample<?= $i?>">
+			  <div class="well">
+			    <button class = "btn btn-default" >Rimuovi</button> <button class = "btn btn-default">Visualizza</button>
+			  </div>
+		  </div>
+		  <?php endfor;?>
+		</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Torna ai prodotti</button>
