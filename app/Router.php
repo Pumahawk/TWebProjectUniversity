@@ -13,6 +13,7 @@
 			Router::get("/", "App\View\SitePage::homePage");
 			Router::get("contact", "App\View\SitePage::contactPage");
 			Router::get("manageProducts", "App\View\SitePage::manageProductsPage");
+			Router::get("optionProduct", "App\View\SitePage::optionProductPage");
 			Router::get("manageOrders", "App\View\SitePage::manageOrdersPage");
 			Router::get("optionProfile", "App\View\SitePage::optionProfilePage");
 

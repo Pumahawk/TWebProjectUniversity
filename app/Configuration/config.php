@@ -5,9 +5,9 @@
 
 //        START DATABASE CONFIGURATION
 
-define("DATABASE_HOST", "");
-define("DATABASE_NAME", "");
-define("DATABASE_USERNAME", "");
+define("DATABASE_HOST", "127.0.0.1");
+define("DATABASE_NAME", "twcommerce");
+define("DATABASE_USERNAME", "root");
 define("DATABASE_PASSWORD", "");
 
 //		  END DATABASE CONFIGURATION

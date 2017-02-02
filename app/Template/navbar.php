@@ -10,7 +10,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><span class="glyphicon glyphicon-shopping-cart " aria-hidden="true"></span><span class="badge">42</span></a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-shopping-cart " aria-hidden="true"></span><span class="badge" id = "counterCart">0</span></a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Utente/Login <span class="caret"></span></a>
                 <ul class="dropdown-menu">

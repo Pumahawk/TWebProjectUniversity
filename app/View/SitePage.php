@@ -13,7 +13,12 @@
 		}
 		public function userOptionPage(){
 			$page = (new SitePage());
-			$page -> MAIN_PAGE = "center_page/user_option_page.php";
+			$page -> CENTER_PAGE = "center_page/user_option_page.php";
+			$page -> requirePage();
+		}
+		public function optionProductPage(){
+			$page = (new SitePage());
+			$page -> CENTER_PAGE = "center_page/option_product.php";
 			$page -> requirePage();
 		}
 		public function manageOrdersPage(){
