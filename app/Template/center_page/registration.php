@@ -19,4 +19,5 @@
     <label for="exampleInputEmail1">Indirizzo</label>
     <input type="email" class="form-control" id="exampleInputEmail1" >
   </div>
+        <a href = ""><button type="button" class="btn btn-default"  >Registrati</button></a>
 </div></div>
