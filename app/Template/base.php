@@ -36,6 +36,7 @@
 	  
 		<script src="js/jquery.min.js" ></script>
 		<script src="bootstrap/js/bootstrap.min.js" ></script>
+		<script src="js/function_support.js" ></script>
 
 	</body>
 </html>

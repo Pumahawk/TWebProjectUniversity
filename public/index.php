@@ -13,5 +13,6 @@ Framework::loadPhpFile("../app/View");
 
 use App\Router;
 
+session_start();
 Router::boot();
 Router::process((isset($_GET["request"]) ? $_GET["request"] : "/"));

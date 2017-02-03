@@ -14,11 +14,13 @@
               
               <?php if(isset($_SESSION["utente"])):?>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $_SESSION["utente"] ?><span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $_SESSION["utente"]["email"] ?><span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="?request=manageOrders">Visualizza ordini</a></li>
+                  <?php if($_SESSION["utente"]["tipo"] == "admin"):?>
                   <li role="separator" class="divider"></li>
                   <li><a href="?request=manageProducts">Gestione prodotti</a></li>
+                  <?php endif;?>
                   <li role="separator" class="divider"></li>
                   <li><a href="?request=optionProfile">Impostazioni profilo</a></li>
                   <li><a href="?request=logOut">Logout</a></li>

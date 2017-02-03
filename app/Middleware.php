@@ -5,13 +5,14 @@
 	
 	class Middleware extends BaseMiddleware{
 		public static function logged($request){
-			if(!isset($_SESSION["user"]) || $_SESSION["user"] == null)
+			if(!isset($_SESSION["utente"]) || $_SESSION["utente"] == null)
 				Router::process("notLogged");
-			else
+			else{
 				Middleware::process($request);
+			}
 		}
 		public static function isAdmin($request){
-			if(!isset($_SESSION["user"]) || $_SESSION["user"] == null || $_SESSION["tipo"] != "admin")
+			if(!isset($_SESSION["utente"]) || $_SESSION["utente"] == null || $_SESSION["utente"]["tipo"] != "admin")
 				Router::process("notAdmin");
 			else
 				Middleware::process($request);

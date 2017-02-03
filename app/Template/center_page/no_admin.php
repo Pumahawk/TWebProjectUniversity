@@ -1,0 +1,1 @@
+Non si possiedono i privilegi di amministratore

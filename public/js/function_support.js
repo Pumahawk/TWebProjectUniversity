@@ -4,15 +4,12 @@ $("#loginForm").submit(function(event){
 	var password = $("#loginForm #password").val();
 	
 	$.post("?request=loginForm",{
-		nome:nome,
-		cognome:cognome,
 		email:email,
-		password:password,
-		indirizzo:indirizzo
+		password:password
 	}, function(data){
-		data = JSON.decode(data);
+		data = JSON.parse(data);
 		if(data["message"] == "error"){
-			$("#loginForm #errorMessage").html("Nome utente o password sbagliati.");
+			$("#loginForm #errorMessage").html("Nome <strong>utente</strong> o <strong>password</strong> sbagliati.");
 			$("#loginForm #errorMessage").show();
 		}
 		else window.location.replace(".");
@@ -29,33 +26,74 @@ $("#registrazioneForm").submit(function(event){
 	var error = "";
 
 	if(nome.length<5 | nome.length > 15)
-		error += "Il nome deve essere compreso tra i 5 e i 15 caratteri.<br>";
+		error += "Il <strong>nome</strong> deve essere compreso tra i 5 e i 15 caratteri.<br>";
 	if(cognome.length<5 | cognome.length > 15)
-		error += "Il cognome deve essere compreso tra i 5 e i 15 caratteri.<br>";
+		error += "Il <strong>cognome</strong> deve essere compreso tra i 5 e i 15 caratteri.<br>";
 	if(!validateEmail(email))
-		error += "Email non valida.<br>";
+		error += "<strong>Email</strong> non valida.<br>";
 	if(password.length<5 | password.length > 15)
-		error += "La password deve essere compresa tra i 5 e i 15 caratteri.<br>";
+		error += "La <strong>password</strong> deve essere compresa tra i 5 e i 15 caratteri.<br>";
 	if(indirizzo.length<5 | indirizzo.length > 30)
-		error += "L'indirizzo deve essere compreso tra i 5 e i 30 caratteri.<br>";
-
-	$("#registrazioneForm #errorMessage").html(error);
-	$("#registrazioneForm #errorMessage").show();
+		error += "L'<strong>indirizzo</strong> deve essere compreso tra i 5 e i 30 caratteri.<br>";
 	
-	$.post("?request=registration",{
-		nome:nome,
-		cognome:cognome,
-		email:email,
-		password:password,
-		indirizzo:indirizzo
-	}, function(data){
-		data = JSON.decode(data);
-		if(data["message"] == "error"){
-			$("#registrazioneLogin #errorMessage").html("Errore nella registrazione");
-			$("#registrazioneLogin #errorMessage").show();
-		}
-		else window.location.replace(".");
-	});
+	if(error != ""){
+		$("#registrazioneForm #errorMessage").html(error);
+		$("#registrazioneForm #errorMessage").show();
+	}
+	else
+		$.post("?request=registrationJSON",{
+			nome:nome,
+			cognome:cognome,
+			email:email,
+			password:password,
+			indirizzo:indirizzo
+		}, function(data){
+			data = JSON.parse(data);
+			if(data["message"] == "error"){
+				$("#registrazioneForm #errorMessage").html("Errore nella registrazione");
+				$("#registrazioneForm #errorMessage").show();
+			}
+			else window.location.replace(".");
+		});
+});
+$("#modificaUtenteForm").submit(function(event){
+	event.preventDefault();
+	var nome = $("#modificaUtenteForm #nome").val();
+	var cognome = $("#modificaUtenteForm #cognome").val();
+	var email = $("#modificaUtenteForm #email").val();
+	var indirizzo = $("#modificaUtenteForm #indirizzo").val();
+	var error = "";
+
+	if(nome.length<5 | nome.length > 15)
+		error += "Il <strong>nome</strong> deve essere compreso tra i 5 e i 15 caratteri.<br>";
+	if(cognome.length<5 | cognome.length > 15)
+		error += "Il <strong>cognome</strong> deve essere compreso tra i 5 e i 15 caratteri.<br>";
+	if(!validateEmail(email))
+		error += "La <strong>password</strong> deve essere compresa tra i 5 e i 15 caratteri.<br>";
+	if(indirizzo.length<5 | indirizzo.length > 30)
+		error += "L'<strong>indirizzo</strong> deve essere compreso tra i 5 e i 30 caratteri.<br>";
+	
+	if(error != ""){
+		$("#modificaUtenteForm #errorMessage").html(error);
+		$("#modificaUtenteForm #errorMessage").show();
+	}
+	else
+		$.post("?request=ModificaUtenteJSON",{
+			nome:nome,
+			cognome:cognome,
+			email:email,
+			indirizzo:indirizzo
+		}, function(data){
+			data = JSON.parse(data);
+			if(data["message"] == "error"){
+				$("#modificaUtenteForm #errorMessage").html("Impossibile modificare i propri dati.");
+				$("#modificaUtenteForm #errorMessage").show();
+			}
+			else{
+				$("#modificaUtenteForm #errorMessage").html("Dati modificati con successo");
+				$("#modificaUtenteForm #errorMessage").show();
+			}
+		});
 });
 
 function setClickOnProduct(){

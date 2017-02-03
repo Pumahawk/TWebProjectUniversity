@@ -1,6 +1,6 @@
 <?php
 
-//TODO
+error_reporting(E_ALL ^ E_STRICT);
 
 
 //        START DATABASE CONFIGURATION
