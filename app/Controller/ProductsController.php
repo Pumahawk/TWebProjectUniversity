@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Model\Product;
 use Bin\Resource;
+use App\View\Products;
 
 class ProductController{
 	public static function manageOrdersPage(){
@@ -32,5 +33,10 @@ class ProductController{
 		$img = $_GET["img"];
 		header("Content-Type: image/png");
 		echo file_get_contents("../resource/ProductsImages/".$img);
+	}
+	
+	public static function homePage(){
+		$prodotti = Product::all();
+		(new \App\View\Sitepage) -> homePage($prodotti);
 	}
 }

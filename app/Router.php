@@ -11,7 +11,7 @@
 			Router::get("testview", 'App\View\Test::test');
 			
 			Router::get("getInfoProd", "App\Controller\ProductController::getFromId") -> middleware("isAdmin");
-			Router::get("/", "App\View\SitePage::homePage");
+			Router::get("/", "App\Controller\ProductController::homePage");
 			Router::get("notAdmin", "App\View\User::notAdminPage");
 			Router::get("openImg", "App\Controller\ProductController::openImg");
 			Router::get("registrationPage", "App\View\SitePage::registrationPage");
