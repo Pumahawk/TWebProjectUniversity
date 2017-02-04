@@ -11,7 +11,7 @@
 		  <a class="list-group-item" data-toggle="collapse" data-target="#collapseExample<?= $i?>">Titolo Prodotto</a>
 		  <div class="collapse" id="collapseExample<?= $i?>">
 			  <div class="well">
-			    <button class = "btn btn-default" >Rimuovi</button> <button class = "btn btn-default">Visualizza</button>
+			    <button class = "btn btn-default" >Rimuovi</button>
 			  </div>
 		  </div>
 		  <?php endfor;?>

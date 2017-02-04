@@ -78,7 +78,7 @@ $("#modificaUtenteForm").submit(function(event){
 		$("#modificaUtenteForm #errorMessage").show();
 	}
 	else
-		$.post("?request=ModificaUtenteJSON",{
+		$.post("?request=modificaUtenteJSON",{
 			nome:nome,
 			cognome:cognome,
 			email:email,
@@ -87,13 +87,29 @@ $("#modificaUtenteForm").submit(function(event){
 			data = JSON.parse(data);
 			if(data["message"] == "error"){
 				$("#modificaUtenteForm #errorMessage").html("Impossibile modificare i propri dati.");
+				$("#modificaUtenteForm #errorMessage").removeClass("alert-success");
+				$("#modificaUtenteForm #errorMessage").addClass("alert-danger");
 				$("#modificaUtenteForm #errorMessage").show();
 			}
 			else{
 				$("#modificaUtenteForm #errorMessage").html("Dati modificati con successo");
+				$("#modificaUtenteForm #errorMessage").removeClass("alert-danger");
+				$("#modificaUtenteForm #errorMessage").addClass("alert-success");
 				$("#modificaUtenteForm #errorMessage").show();
 			}
 		});
+});
+
+$(".btn-visualizza-prodotto").click(function (event){
+	var id = $(this).attr("data-id");
+	$.get("?request=getInfoProd&id=" + id, function(data){
+		data = JSON.parse(data);
+		$("#productView #titleProduct").html(data["titolo"]);
+		alert
+		$("#productView #img").html("<img src = '?request=openImg&img="+data["immagine"]+"' >");
+		$("#productView #description").html(data["descrizione"]);
+		$("#productView #price").html(data["prezzo"]);
+	});
 });
 
 function setClickOnProduct(){

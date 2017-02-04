@@ -3,6 +3,7 @@
 	namespace App\View;
 	
 	class SitePage extends BaseView{
+		public $productList;
 		public function homePage(){
 			$page = (new SitePage());
 			$page -> CENTER_PAGE = "center_page/home_center.php";
@@ -26,13 +27,15 @@
 			$page -> CENTER_PAGE = "center_page/option_product.php";
 			$page -> requirePage();
 		}
-		public function manageOrdersPage(){
+		public function manageOrdersPage($productsList){
 			$page = (new SitePage());
+			$page -> productsList = $productsList;
 			$page -> CENTER_PAGE = "center_page/manage_orders.php";
 			$page -> requirePage();
 		}
-		public function manageProductsPage(){
+		public function manageProductsPage($productsList){
 			$page = (new SitePage());
+			$page -> productsList = $productsList;
 			$page -> CENTER_PAGE = "center_page/manage_product.php";
 			$page -> requirePage();
 		}

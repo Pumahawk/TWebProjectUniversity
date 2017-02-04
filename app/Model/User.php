@@ -3,7 +3,7 @@
 	use Bin\Database;
 	class User{
 
-		public static function newUser($nome, $cognome, $email, $indirizzo){
+		public static function newUser($nome, $cognome, $email, $password, $indirizzo){
 			$db = Database::connect();
 			$query = "INSERT INTO utenti (nome, cognome, email, password, indirizzo, tipo) VALUES (".$db -> quote($nome).", ".$db -> quote($cognome).", ".$db -> quote($email).", ".$db -> quote($password).", ".$db -> quote($indirizzo).", 'normal')";
 			$risp = $db -> query($query);
@@ -11,7 +11,7 @@
 		}
 		public static function editUser($id, $nome, $cognome, $email, $indirizzo){
 			$db = Database::connect();
-			$query = "UPDATE utenti SET nome = ".$db -> quote($nome).",  cognome = ".$db -> quote($cognome).", email = ".$db -> quote($email).", indirizzo = ".$db -> quote($indirizzo).") WHERE id = ".$id;
+			$query = "UPDATE utenti SET nome = ".$db -> quote($nome).",  cognome = ".$db -> quote($cognome).", email = ".$db -> quote($email).", indirizzo = ".$db -> quote($indirizzo)." WHERE id = ".$id;
 			$risp = $db -> query($query);
 			if($risp){
 			}

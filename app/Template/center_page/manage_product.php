@@ -1,22 +1,11 @@
-<?php 
-$ordini_test = [ 
-		[
-				"id" => 0,
-				"titolo" => "20170202",
-				"descrizione" => "aperto"],[
-				"id" => 0,
-				"titolo" => "20170202",
-				"descrizione" => "aperto"],[
-				"id" => 0,
-				"titolo" => "20170202",
-				"descrizione" => "aperto"]
-		
-		 
-];
-//var_dump($ordini_test);
-?><table class="table table-striped">
+
+<button class = "btn btn-default" data-toggle="modal" data-target="#newProduct">Aggiungi</button>
+<hr />
+<table class="table table-striped">
   	<tr><td>ID</td><td>Titolo</td><td>Azioni</td>
-  <?php foreach ($ordini_test as $ordine):?>
-  	<tr><td><?=$ordine["id"]?></td><td><?=$ordine["titolo"]?></td><td>Pulsanti...</td>
+  <?php if($this->productsList != null)foreach ($this->productsList as $ordine):?>
+  	<tr><td><?=$ordine["id"]?></td><td><?=$ordine["titolo"]?></td><td><button id = "prodotto" class = "btn-visualizza-prodotto btn btn-default" data-toggle="modal" data-target="#productView" data-id = "<?=$ordine["id"]?>">Visualizza</button></td>
   <?php endforeach;?>
 </table>
+
+<?php require $BASE_PATH_TEMPLATE."modal/product_manage.php" ?>
