@@ -1,5 +1,9 @@
 @CHARSET "ISO-8859-1";
 
+#productView img{
+	max-height:320px;
+}
+
 .productShow{
 	max-width:280px;
 	margin:auto;
