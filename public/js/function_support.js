@@ -144,6 +144,31 @@ function setClickOnProduct(){
 }
 setClickOnProduct();
 
+$("#byCartButton").click(function(event){
+	$.get("?request=buy", function(data){
+		data = JSON.parse(data);
+		if(data != "error")
+			window.location.href = ".";
+		else
+			alert("Loggarsi o controllare che il carrello non sia vuoto");
+	});
+});
+
+
+$(".btn-visualizza-ordine").click(function (event){
+	var id = $(this).attr("data-id");
+	$.get("?request=getProdOrder&id=" + id, function(data){
+		$("#listProductOrder").html(data);
+	});
+});
+
+$(".set-to-cons").click(function (event){
+	var id = $(this).attr("data-id");
+	$.get("?request=setCons&id=" + id, function(data){
+		window.location.href = "?request=manageOrders";
+	});
+});
+
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);

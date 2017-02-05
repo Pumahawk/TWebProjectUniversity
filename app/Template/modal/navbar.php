@@ -21,12 +21,14 @@
 			  endforeach;
 		  endif;?>
 		</div>
+		<?php if(isset($_SESSION["cart"])):?>
 		  <hr>
 		  Prezzo: <strong><?=$price?></strong>
+		  <?php endif;?>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Torna ai prodotti</button>
-        <button type="button" class="btn btn-primary">Compra</button>
+        <button type="button" class="btn btn-primary" id = "byCartButton">Compra</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

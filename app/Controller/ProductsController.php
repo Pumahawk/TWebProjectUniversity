@@ -3,10 +3,14 @@ namespace App\Controller;
 
 use App\Model\Product;
 use Bin\Resource;
+use App\Model\Order;
 
 class ProductController{
 	public static function manageOrdersPage(){
-		$productList = Product::ofUser($_SESSION["utente"]["id"]);
+		if($_SESSION["utente"]["tipo"] == "admin")
+			$productList = Product::allOrders();
+		else
+			$productList = Product::ofUser($_SESSION["utente"]["id"]);
 		(new \App\View\Sitepage) -> manageOrdersPage($productList);
 	}
 	public static function manageProductsPage(){
@@ -54,6 +58,33 @@ class ProductController{
 				unset($_SESSION["cart"][$k]);
 				break;
 			}
+		echo json_encode($return);
+	}
+
+	public static function buy(){
+		$return["message"] = "error";
+		if(isset($_SESSION['utente'], $_SESSION["cart"]) && count($_SESSION["cart"]) > 0){
+			Order::buy($_SESSION["cart"], $_SESSION["utente"]["id"]);
+			unset($_SESSION["cart"]);
+			$return["message"] = "success";
+		}
+		echo json_encode($return);
+	}
+	public static function getProdOrder(){
+		$products = Product::getFromOrder($_GET["id"]);
+		$totale = 0;
+		?>
+      	 <div class="list-group text-center">
+      	 <?php foreach($products as $prod):
+      	 $totale += $prod["prezzo"];?>
+		  <a class="list-group-item" data-toggle="collapse">Titolo: <strong><?=$prod["titolo"]?></strong>Prezzo: <strong><?=$prod["prezzo"]?></strong></a>
+		<?php endforeach;
+		?></div>
+		<hr> Totale: <?= $totale?> <?php 
+	}
+	public static function setCons(){
+		$return["message"] = "success";
+		Order::setCons($_GET["id"]);
 		echo json_encode($return);
 	}
 }
