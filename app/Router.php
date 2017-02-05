@@ -9,8 +9,11 @@
 		public static function boot(){
 			Router::get("helloword", 'App\Router::helloword');
 			Router::get("testview", 'App\View\Test::test');
-			
+
+			Router::get("getProdOrder", "App\Controller\ProductController::getProdOrder");
+			Router::get("setCons", "App\Controller\ProductController::setCons") -> middleware("isAdmin");
 			Router::get("getInfoProd", "App\Controller\ProductController::getFromId");
+			Router::get("buy", "App\Controller\ProductController::buy");
 			Router::get("/", "App\Controller\ProductController::homePage");
 			Router::get("notAdmin", "App\View\User::notAdminPage");
 			Router::get("addProductToCart", "App\Controller\ProductController::addToCart");
