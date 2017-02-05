@@ -1,5 +1,5 @@
 <div class = "row">
-	<?php foreach($this -> productsList as $pr):?>
+	<?php if($this -> productsList)foreach($this -> productsList as $pr):?>
 		<div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-offset-0 col-lg-offset-0 col-md-3 .col-lg-2 ">
 			<div class="thumbnail "> 
 			<img alt="100%x200" data-src="holder.js/100%x200" src="?request=openImg&img=<?= $pr["immagine"]?>" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;"> 

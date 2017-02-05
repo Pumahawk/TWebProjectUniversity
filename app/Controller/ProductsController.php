@@ -3,7 +3,6 @@ namespace App\Controller;
 
 use App\Model\Product;
 use Bin\Resource;
-use App\View\Products;
 
 class ProductController{
 	public static function manageOrdersPage(){
@@ -34,9 +33,27 @@ class ProductController{
 		header("Content-Type: image/png");
 		echo file_get_contents("../resource/ProductsImages/".$img);
 	}
-	
+
 	public static function homePage(){
 		$prodotti = Product::all();
 		(new \App\View\Sitepage) -> homePage($prodotti);
+	}
+
+	public static function addToCart(){
+		$return["message"] = "error";
+		if($pr = Product::getFromId($_GET["id"])){
+			$_SESSION["cart"][] = $pr;
+			$return["message"] = "success";
+		}
+		echo json_encode($return);
+	}
+	public static function removeProductfromCart(){
+		$return["message"] = "success";
+		foreach ($_SESSION["cart"] as $k => $pr){
+			if($pr["id"] == $_GET["id"])
+				unset($_SESSION["cart"][$k]);
+				break;
+			}
+		echo json_encode($return);
 	}
 }

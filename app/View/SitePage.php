@@ -4,9 +4,9 @@
 	
 	class SitePage extends BaseView{
 		public $productList;
-		public function homePage($productList){
+		public function homePage($productsList){
 			$page = (new SitePage());
-			$page -> productsList = $productList;
+			$page -> productsList = $productsList;
 			$page -> CENTER_PAGE = "center_page/home_center.php";
 			$page -> requirePage();
 		}

@@ -105,10 +105,35 @@ $(".btn-visualizza-prodotto").click(function (event){
 	$.get("?request=getInfoProd&id=" + id, function(data){
 		data = JSON.parse(data);
 		$("#productView #titleProduct").html(data["titolo"]);
-		alert
 		$("#productView #img").html("<img src = '?request=openImg&img="+data["immagine"]+"' >");
 		$("#productView #description").html(data["descrizione"]);
-		$("#productView #price").html(data["prezzo"]);
+		$("#productView #price").html(data["prezzo"])
+		$("#productView #id").html(data["id"]);
+		$("#addToCart").attr("data-id", data["id"]);
+	});
+});
+
+$("#addToCart").click(function (event){
+	var id = $(this).attr("data-id");
+	$.get("?request=addProductToCart&id=" + id, function(data){
+		data = JSON.parse(data);
+		if(data["message"] == "error"){
+			alert("error");
+		}else{
+			window.location.href = ".";
+		}
+	});
+});
+
+$(".removeFromCart").click(function(event){
+	var id = $(this).attr("data-id");
+	$.get("?request=removeProductfromCart&id=" + id, function(data){
+		data = JSON.parse(data);
+		if(data["message"] == "error"){
+			alert("error");
+		}else{
+			window.location.href = ".";
+		}
 	});
 });
 

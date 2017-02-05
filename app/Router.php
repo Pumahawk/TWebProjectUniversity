@@ -13,6 +13,8 @@
 			Router::get("getInfoProd", "App\Controller\ProductController::getFromId") -> middleware("isAdmin");
 			Router::get("/", "App\Controller\ProductController::homePage");
 			Router::get("notAdmin", "App\View\User::notAdminPage");
+			Router::get("addProductToCart", "App\Controller\ProductController::addToCart");
+			Router::get("removeProductfromCart", "App\Controller\ProductController::removeProductfromCart");
 			Router::get("openImg", "App\Controller\ProductController::openImg");
 			Router::get("registrationPage", "App\View\SitePage::registrationPage");
 			Router::get("registrationJSON", "App\Controller\UserController::registrationJSON");

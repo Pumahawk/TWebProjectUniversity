@@ -13,7 +13,7 @@
       <strong>Prezzo: </strong><span id = "price">price</span> &euro;
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Compra</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id = "addToCart">Compra</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
       </div>
     </div><!-- /.modal-content -->

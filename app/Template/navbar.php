@@ -10,7 +10,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#" data-target="#cartView" data-toggle="modal"><span class="glyphicon glyphicon-shopping-cart " aria-hidden="true"></span><span class="badge" id = "counterCart">0</span></a></li>
+              <li><a href="#" data-target="#cartView" data-toggle="modal"><span class="glyphicon glyphicon-shopping-cart " aria-hidden="true"></span><span class="badge" id = "counterCart"><?= isset($_SESSION["cart"]) ?  count($_SESSION["cart"]) : 0?></span></a></li>
               
               <?php if(isset($_SESSION["utente"])):?>
               <li class="dropdown">

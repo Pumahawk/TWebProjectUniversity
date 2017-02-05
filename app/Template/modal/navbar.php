@@ -7,15 +7,22 @@
       </div>
       <div class="modal-body" id = "listProductCart">
       	 <div class="list-group text-center">
-      	 <?php for($i=0; $i<10; $i++):?>
-		  <a class="list-group-item" data-toggle="collapse" data-target="#collapseExample<?= $i?>">Titolo Prodotto</a>
-		  <div class="collapse" id="collapseExample<?= $i?>">
-			  <div class="well">
-			    <button class = "btn btn-default" >Rimuovi</button>
+      	 <?php
+      	 if(isset($_SESSION["cart"])):
+	      	 $i = 0; $price = 0;foreach($_SESSION["cart"] as $product):?>
+			  <a class="list-group-item" data-toggle="collapse" data-target="#collapseExample<?= $i?>"><strong><?=$product["titolo"]?></strong></a>
+			  <div class="collapse" id="collapseExample<?= $i++?>">
+				  <div class="well">
+				    <button class = "btn btn-default removeFromCart" data-id = "<?= $product["id"]?>" >Rimuovi</button>
+				  </div>
 			  </div>
-		  </div>
-		  <?php endfor;?>
+			  <?php 
+			  $price += $product["prezzo"];
+			  endforeach;
+		  endif;?>
 		</div>
+		  <hr>
+		  Prezzo: <strong><?=$price?></strong>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Torna ai prodotti</button>
