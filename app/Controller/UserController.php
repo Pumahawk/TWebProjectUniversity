@@ -4,27 +4,24 @@
 	use App\Router;
 	use App\Model\User;
 	
+	/**
+	 * Controller che gestisce le richieste che riguardano un utente
+	 * @author Lorenzo
+	 *
+	 */
 	class UserController{
+		
+		/**
+		 * Rispnde alla richiesta di logout ed elimina dalla sessione l'utente.
+		 */
 		public static function logOut(){
 			$_SESSION["utente"] = null;
 			\App\Router::process("/");
 		}
-		
-		public static function buy(){
-			exit();
-			if(!isset($_SESSION["cart"])){
-				echo "cart inesistente";
-				exit();
-			}
-			$db = \Bin\Database::connect();
-			$query = "INSERT INTO ordini (stato,id_utente) VALUES ('aperto',".$_SESSION["user"]["id"].")";
-			$db -> query();
-			foreach($_SESSION["cart"] as $idProduct){
-				$query = "INSERT INTO venuto";
-				//TODO
-			}
-		}
 
+		/**
+		 * Effettua la registrazione dell'utente e risponde in formato JSON al client.
+		 */
 		public static function registrationJSON(){
 			$return["message"] = "error";
 			if(isset($_POST["nome"], $_POST["cognome"], $_POST["email"], $_POST["password"], $_POST["indirizzo"]))
@@ -34,6 +31,10 @@
 			}
 			echo json_encode($return);
 		}
+		
+		/**
+		 * Modifica le informazioni di un utente e risponde in formato JSON
+		 */
 		public static function modificaUtenteJSON(){
 			$return["message"] = "error";
 			if(isset($_POST["nome"], $_POST["cognome"], $_POST["email"], $_POST["indirizzo"]))
@@ -44,6 +45,9 @@
 			echo json_encode($return);
 		}
 		
+		/**
+		 * Effettua il login di un utente e risponde in formato JSON
+		 */
 		public static function loginJSON(){
 			$return["message"] = "error";
 			if(isset($_POST["email"], $_POST["password"]))
