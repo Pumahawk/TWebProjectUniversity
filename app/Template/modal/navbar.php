@@ -10,7 +10,7 @@
       	 <?php
       	 if(isset($_SESSION["cart"])):
 	      	 $i = 0; $price = 0;foreach($_SESSION["cart"] as $product):?>
-			  <a class="list-group-item" data-toggle="collapse" data-target="#collapseExample<?= $i?>"><strong><?=$product["titolo"]?></strong></a>
+			  <a class="list-group-item" data-toggle="collapse" data-target="#collapseExample<?= $i?>"><strong><?=$product["titolo"]?></strong><br><span class = "priceProduct"><?=$product["prezzo"]?></span> &euro;</a>
 			  <div class="collapse" id="collapseExample<?= $i++?>">
 				  <div class="well">
 				    <button class = "btn btn-default removeFromCart" data-id = "<?= $product["id"]?>" >Rimuovi</button>
@@ -23,7 +23,7 @@
 		</div>
 		<?php if(isset($_SESSION["cart"])):?>
 		  <hr>
-		  Prezzo: <strong><?=$price?></strong>
+		  Prezzo: <strong id = "totalPrice"><?=$price?></strong> &euro;
 		  <?php endif;?>
       </div>
       <div class="modal-footer">

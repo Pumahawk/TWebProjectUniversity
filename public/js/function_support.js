@@ -216,9 +216,15 @@ $("#addToCart").click(function (event){
 });
 
 $(".removeFromCart").click(function(event){
+	var th = this;
 	var id = $(this).attr("data-id");
 	Product.removeFromCart(id, function(){
-		window.location.href = ".";
+		var price = Number($(th).parent().parent().prev().find(".priceProduct").html());
+		$(th).parent().parent().prev().remove();
+		$(th).parent().parent().remove();
+		$("#counterCart").html(Number($("#counterCart").html()) - 1);
+		$("#totalPrice").html(Number($("#totalPrice").html()) - price);
+		
 	},function(){
 		alert("Impossibile rimuovere il prodotto dal carrello");
 	});
