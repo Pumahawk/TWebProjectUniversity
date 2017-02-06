@@ -2,7 +2,19 @@
 
 namespace Bin;
 
+/**
+ * Collezione di metodi per la gestione al database.
+ * 
+ * @author Lorenzo
+ *
+ */
+
 class Database{
+	
+	/**
+	 * Restituisce l'oggetto della classe PDO connesso al database.
+	 * @return \PDO|NULL
+	 */
 	public static function connect(){
 		/* Connect to a MySQL database using driver invocation */
 		$dsn = 'mysql:dbname='.DATABASE_NAME.';host='.DATABASE_HOST;

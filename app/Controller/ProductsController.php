@@ -24,7 +24,7 @@ class ProductController{
 	}
 	
 	public static function newProduct(){
-		if($name = Resource::saveFile($_FILES["foto"]))
+		if($name = Resource::saveUploadedFile($_FILES["foto"], "ProductsImages/"))
 			Product::newProduct($_POST["titolo"],basename($name),$_POST["prezzo"],$_POST["descrizione"]);
 	}
 	
@@ -35,7 +35,7 @@ class ProductController{
 	public static function openImg(){
 		$img = $_GET["img"];
 		header("Content-Type: image/png");
-		echo file_get_contents("../resource/ProductsImages/".$img);
+		echo Resource::readFile("ProductsImages/".$img);
 	}
 
 	public static function homePage(){
