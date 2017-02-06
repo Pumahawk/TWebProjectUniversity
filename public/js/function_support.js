@@ -1,18 +1,135 @@
+//-------------------START PRODUCT AREA------------------------
+
+class Product{
+	static addToCart(id, success, error){
+		$.get("?request=addProductToCart&id=" + id, function(data){
+			data = JSON.parse(data);
+			if(data["message"] == "error"){
+				error()
+			}else{
+				success();
+			}
+		});
+	}
+	
+	static addToView(id){
+		$.get("?request=getInfoProd&id=" + id, function(data){
+			data = JSON.parse(data);
+			$("#productView #titleProduct").html(data["titolo"]);
+			$("#productView #img").html("<img src = '?request=openImg&img="+data["immagine"]+"' >");
+			$("#productView #description").html(data["descrizione"]);
+			$("#productView #price").html(data["prezzo"])
+			$("#productView #id").html(data["id"]);
+			$("#addToCart").attr("data-id", data["id"]);
+		});
+	}
+	
+	static removeFromCart(id, success, error){
+		$.get("?request=removeProductfromCart&id=" + id, function(data){
+			data = JSON.parse(data);
+			if(data["message"] == "error"){
+				error();
+			}else{
+				success();
+			}
+		});
+	}
+	
+	static buyCart(){
+		$.get("?request=buy", function(data){
+			data = JSON.parse(data);
+			if(data != "error")
+				window.location.href = ".";
+			else
+				alert("Loggarsi o controllare che il carrello non sia vuoto");
+		})
+	}
+}
+
+//---------------------END PRODUCT AREA------------------------
+
+//----------------------START USER AREA------------------------
+
+class User{
+	static login(email, password, success, error){
+		$.post("?request=loginForm",{
+			email:email,
+			password:password
+		}, function(data){
+			data = JSON.parse(data);
+			if(data["message"] == "error"){
+				error();
+			}
+			else success();
+		});
+	}
+	
+	static registration(nome, cognome, email, passowrd, indirizzo, success, error){
+		$.post("?request=registrationJSON",{
+			nome:nome,
+			cognome:cognome,
+			email:email,
+			password:password,
+			indirizzo:indirizzo
+		}, function(data){
+			data = JSON.parse(data);
+			if(data["message"] == "error"){
+				error();
+			}
+			else success();
+		});
+	}
+	
+	static edit(nome,cognome,email,indirizzo, success, error){
+		$.post("?request=modificaUtenteJSON",{
+			nome:nome,
+			cognome:cognome,
+			email:email,
+			indirizzo:indirizzo
+		}, function(data){
+			data = JSON.parse(data);
+			if(data["message"] == "error")
+				error();
+			else
+				success();
+		});
+	}
+}
+
+//-----------------------END USER AREA----------------------
+
+//----------------------START ORDER AREA------------------------
+
+class Order{
+	static viewOrder(id){
+		$.get("?request=getProdOrder&id=" + id, function(data){
+			$("#listProductOrder").html(data);
+		});
+	}
+	
+	static setToConst(id){
+		$.get("?request=setCons&id=" + id, function(data){
+			window.location.href = "?request=manageOrders";
+		});
+	}
+}
+
+//-----------------------END ORDER AREA----------------------
+
+
+//---------------START JQUERY FUNCTIONS----------------------
+
 $("#loginForm").submit(function(event){
 	event.preventDefault();
 	var email = $("#loginForm #email").val();
 	var password = $("#loginForm #password").val();
 	
-	$.post("?request=loginForm",{
-		email:email,
-		password:password
-	}, function(data){
-		data = JSON.parse(data);
-		if(data["message"] == "error"){
-			$("#loginForm #errorMessage").html("Nome <strong>utente</strong> o <strong>password</strong> sbagliati.");
-			$("#loginForm #errorMessage").show();
-		}
-		else window.location.replace(".");
+	User.login(email, password, function(){
+		window.location.replace(".");
+	},
+	function(){
+		$("#loginForm #errorMessage").html("Nome <strong>utente</strong> o <strong>password</strong> sbagliati.");
+		$("#loginForm #errorMessage").show();
 	});
 
 });
@@ -41,19 +158,11 @@ $("#registrazioneForm").submit(function(event){
 		$("#registrazioneForm #errorMessage").show();
 	}
 	else
-		$.post("?request=registrationJSON",{
-			nome:nome,
-			cognome:cognome,
-			email:email,
-			password:password,
-			indirizzo:indirizzo
-		}, function(data){
-			data = JSON.parse(data);
-			if(data["message"] == "error"){
-				$("#registrazioneForm #errorMessage").html("Errore nella registrazione");
-				$("#registrazioneForm #errorMessage").show();
-			}
-			else window.location.replace(".");
+		User.registration(nome, cognome, email, passowrd, indirizzo, function(){
+			window.location.replace(".");
+		}, function(){
+			$("#registrazioneForm #errorMessage").html("Errore nella registrazione");
+			$("#registrazioneForm #errorMessage").show();
 		});
 });
 $("#modificaUtenteForm").submit(function(event){
@@ -78,98 +187,54 @@ $("#modificaUtenteForm").submit(function(event){
 		$("#modificaUtenteForm #errorMessage").show();
 	}
 	else
-		$.post("?request=modificaUtenteJSON",{
-			nome:nome,
-			cognome:cognome,
-			email:email,
-			indirizzo:indirizzo
-		}, function(data){
-			data = JSON.parse(data);
-			if(data["message"] == "error"){
-				$("#modificaUtenteForm #errorMessage").html("Impossibile modificare i propri dati.");
-				$("#modificaUtenteForm #errorMessage").removeClass("alert-success");
-				$("#modificaUtenteForm #errorMessage").addClass("alert-danger");
-				$("#modificaUtenteForm #errorMessage").show();
-			}
-			else{
-				$("#modificaUtenteForm #errorMessage").html("Dati modificati con successo");
-				$("#modificaUtenteForm #errorMessage").removeClass("alert-danger");
-				$("#modificaUtenteForm #errorMessage").addClass("alert-success");
-				$("#modificaUtenteForm #errorMessage").show();
-			}
+		User.edit(nome,cognome,email,indirizzo, function(){
+			$("#modificaUtenteForm #errorMessage").html("Dati modificati con successo");
+			$("#modificaUtenteForm #errorMessage").removeClass("alert-danger");
+			$("#modificaUtenteForm #errorMessage").addClass("alert-success");
+			$("#modificaUtenteForm #errorMessage").show();
+		}, function(){
+			$("#modificaUtenteForm #errorMessage").html("Impossibile modificare i propri dati.");
+			$("#modificaUtenteForm #errorMessage").removeClass("alert-success");
+			$("#modificaUtenteForm #errorMessage").addClass("alert-danger");
+			$("#modificaUtenteForm #errorMessage").show();
 		});
 });
 
 $(".btn-visualizza-prodotto").click(function (event){
 	var id = $(this).attr("data-id");
-	$.get("?request=getInfoProd&id=" + id, function(data){
-		data = JSON.parse(data);
-		$("#productView #titleProduct").html(data["titolo"]);
-		$("#productView #img").html("<img src = '?request=openImg&img="+data["immagine"]+"' >");
-		$("#productView #description").html(data["descrizione"]);
-		$("#productView #price").html(data["prezzo"])
-		$("#productView #id").html(data["id"]);
-		$("#addToCart").attr("data-id", data["id"]);
-	});
+	Product.addToView(id);
 });
 
 $("#addToCart").click(function (event){
 	var id = $(this).attr("data-id");
-	$.get("?request=addProductToCart&id=" + id, function(data){
-		data = JSON.parse(data);
-		if(data["message"] == "error"){
-			alert("error");
-		}else{
-			window.location.href = ".";
-		}
-	});
+	Product.addToCart(id,function(){
+		window.location.href = ".";
+	},
+	function(){
+		alert("error");
+	})
 });
 
 $(".removeFromCart").click(function(event){
 	var id = $(this).attr("data-id");
-	$.get("?request=removeProductfromCart&id=" + id, function(data){
-		data = JSON.parse(data);
-		if(data["message"] == "error"){
-			alert("error");
-		}else{
-			window.location.href = ".";
-		}
+	Product.removeFromCart(id, function(){
+		window.location.href = ".";
+	},function(){
+		alert("Impossibile rimuovere il prodotto dal carrello");
 	});
 });
 
-function setClickOnProduct(){
-	$("pulsanteProdottoVista").click(function(event){
-		$(this).attr("data-id"); // TODO da continuare
-	});
-}
-setClickOnProduct();
-
 $("#byCartButton").click(function(event){
-	$.get("?request=buy", function(data){
-		data = JSON.parse(data);
-		if(data != "error")
-			window.location.href = ".";
-		else
-			alert("Loggarsi o controllare che il carrello non sia vuoto");
-	});
+		Product.buyCart();
 });
 
 
 $(".btn-visualizza-ordine").click(function (event){
 	var id = $(this).attr("data-id");
-	$.get("?request=getProdOrder&id=" + id, function(data){
-		$("#listProductOrder").html(data);
-	});
+	Order.viewOrder(id);
 });
 
 $(".set-to-cons").click(function (event){
 	var id = $(this).attr("data-id");
-	$.get("?request=setCons&id=" + id, function(data){
-		window.location.href = "?request=manageOrders";
-	});
+	Order.setToCons(id);
 });
-
-function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
