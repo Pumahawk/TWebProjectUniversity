@@ -1,5 +1,4 @@
 <?php
-// $PAGE_TO_OPEN must defined
 	$BASE_PATH_TEMPLATE = "../app/Template/";
 ?><html>
 	<head>
