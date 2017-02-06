@@ -95,8 +95,8 @@ class ProductController{
 	 */
 	public static function removeProductfromCart(){
 		$return["message"] = "success";
-		foreach ($_SESSION["cart"] as $k => $pr){
-			if($pr["id"] == $_GET["id"])
+		foreach ($_SESSION["cart"] as $k => $pr)
+			if(\strcmp($pr["id"], $_GET["id"]) == 0){
 				unset($_SESSION["cart"][$k]);
 				break;
 			}
