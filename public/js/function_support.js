@@ -4,10 +4,10 @@ class Product{
 	static addToCart(id, success, error){
 		$.get("?request=addProductToCart&id=" + id, function(data){
 			data = JSON.parse(data);
-			if(data["message"] == "error"){
-				error()
+			if(data["message"] != "success"){
+				error(data);
 			}else{
-				success();
+				success(data);
 			}
 		});
 	}
@@ -27,21 +27,21 @@ class Product{
 	static removeFromCart(id, success, error){
 		$.get("?request=removeProductfromCart&id=" + id, function(data){
 			data = JSON.parse(data);
-			if(data["message"] == "error"){
-				error();
+			if(data["message"] != "success"){
+				error(data);
 			}else{
-				success();
+				success(data);
 			}
 		});
 	}
 	
-	static buyCart(){
+	static buyCart(success, error){
 		$.get("?request=buy", function(data){
 			data = JSON.parse(data);
-			if(data != "error")
-				window.location.href = ".";
+			if(data["message"] == "success")
+				success(data);
 			else
-				alert("Loggarsi o controllare che il carrello non sia vuoto");
+				error(data);
 		})
 	}
 }
@@ -57,14 +57,14 @@ class User{
 			password:password
 		}, function(data){
 			data = JSON.parse(data);
-			if(data["message"] == "error"){
-				error();
+			if(data["message"] != "success"){
+				error(data);
 			}
-			else success();
+			else success(data);
 		});
 	}
 	
-	static registration(nome, cognome, email, passowrd, indirizzo, success, error){
+	static registration(nome, cognome, email, password, indirizzo, success, error){
 		$.post("?request=registrationJSON",{
 			nome:nome,
 			cognome:cognome,
@@ -73,10 +73,10 @@ class User{
 			indirizzo:indirizzo
 		}, function(data){
 			data = JSON.parse(data);
-			if(data["message"] == "error"){
-				error();
+			if(data["message"] != "success"){
+				error(data);
 			}
-			else success();
+			else success(data);
 		});
 	}
 	
@@ -88,10 +88,10 @@ class User{
 			indirizzo:indirizzo
 		}, function(data){
 			data = JSON.parse(data);
-			if(data["message"] == "error")
-				error();
+			if(data["message"] != "success")
+				error(data);
 			else
-				success();
+				success(data);
 		});
 	}
 }
@@ -107,7 +107,7 @@ class Order{
 		});
 	}
 	
-	static setToConst(id){
+	static setToCons(id){
 		$.get("?request=setCons&id=" + id, function(data){
 			window.location.href = "?request=manageOrders";
 		});
@@ -146,8 +146,6 @@ $("#registrazioneForm").submit(function(event){
 		error += "Il <strong>nome</strong> deve essere compreso tra i 5 e i 15 caratteri.<br>";
 	if(cognome.length<5 | cognome.length > 15)
 		error += "Il <strong>cognome</strong> deve essere compreso tra i 5 e i 15 caratteri.<br>";
-	if(!validateEmail(email))
-		error += "<strong>Email</strong> non valida.<br>";
 	if(password.length<5 | password.length > 15)
 		error += "La <strong>password</strong> deve essere compresa tra i 5 e i 15 caratteri.<br>";
 	if(indirizzo.length<5 | indirizzo.length > 30)
@@ -158,10 +156,10 @@ $("#registrazioneForm").submit(function(event){
 		$("#registrazioneForm #errorMessage").show();
 	}
 	else
-		User.registration(nome, cognome, email, passowrd, indirizzo, function(){
+		User.registration(nome, cognome, email, password, indirizzo, function(){
 			window.location.replace(".");
-		}, function(){
-			$("#registrazioneForm #errorMessage").html("Errore nella registrazione");
+		}, function(message){
+			$("#registrazioneForm #errorMessage").html("Errore nella registrazione: "+ message["text"]);
 			$("#registrazioneForm #errorMessage").show();
 		});
 });
@@ -177,13 +175,13 @@ $("#modificaUtenteForm").submit(function(event){
 		error += "Il <strong>nome</strong> deve essere compreso tra i 5 e i 15 caratteri.<br>";
 	if(cognome.length<5 | cognome.length > 15)
 		error += "Il <strong>cognome</strong> deve essere compreso tra i 5 e i 15 caratteri.<br>";
-	if(!validateEmail(email))
-		error += "La <strong>password</strong> deve essere compresa tra i 5 e i 15 caratteri.<br>";
 	if(indirizzo.length<5 | indirizzo.length > 30)
 		error += "L'<strong>indirizzo</strong> deve essere compreso tra i 5 e i 30 caratteri.<br>";
 	
 	if(error != ""){
 		$("#modificaUtenteForm #errorMessage").html(error);
+		$("#modificaUtenteForm #errorMessage").removeClass("alert-success");
+		$("#modificaUtenteForm #errorMessage").addClass("alert-danger");
 		$("#modificaUtenteForm #errorMessage").show();
 	}
 	else
@@ -231,7 +229,11 @@ $(".removeFromCart").click(function(event){
 });
 
 $("#byCartButton").click(function(event){
-		Product.buyCart();
+		Product.buyCart(function(){
+			window.location.href = ".";
+		}, function(){
+			$("#byCartButton").popover("show");
+		});
 });
 
 

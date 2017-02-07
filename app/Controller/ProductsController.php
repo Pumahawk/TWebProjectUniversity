@@ -83,9 +83,12 @@ class ProductController{
 	 */
 	public static function addToCart(){
 		$return["message"] = "error";
+			$return["text"] = "Impossibile aggiungere il prodotto al carrello. Riprovare piu tardi.";
+		
 		if($pr = Product::getFromId($_GET["id"])){
 			$_SESSION["cart"][] = $pr;
 			$return["message"] = "success";
+			$return["text"] = "Prodotto aggiunto al carrello con successo.";
 		}
 		echo json_encode($return);
 	}
@@ -95,6 +98,7 @@ class ProductController{
 	 */
 	public static function removeProductfromCart(){
 		$return["message"] = "success";
+		$return["text"] = "Prodotto rimosso dal carrello con successo.";
 		foreach ($_SESSION["cart"] as $k => $pr)
 			if(\strcmp($pr["id"], $_GET["id"]) == 0){
 				unset($_SESSION["cart"][$k]);
@@ -108,10 +112,13 @@ class ProductController{
 	 */
 	public static function buy(){
 		$return["message"] = "error";
+		$return["text"] = "Impossibile creare un ordine in questo momento. Riprovare piu tardi.";
+		
 		if(isset($_SESSION['utente'], $_SESSION["cart"]) && count($_SESSION["cart"]) > 0){
 			Order::buy($_SESSION["cart"], $_SESSION["utente"]["id"]);
 			unset($_SESSION["cart"]);
 			$return["message"] = "success";
+			$return["text"] = "Ordine creato con successo";
 		}
 		echo json_encode($return);
 	}
@@ -137,6 +144,8 @@ class ProductController{
 	 */
 	public static function setCons(){
 		$return["message"] = "success";
+		$return["text"] = "Funzione elaborata con successo.";
+		
 		Order::setCons($_GET["id"]);
 		echo json_encode($return);
 	}

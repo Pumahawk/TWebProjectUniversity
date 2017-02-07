@@ -32,7 +32,7 @@
 		 */
 		public static function setCons($idOrder){
 			$db = Database::connect();
-			$query = "UPDATE ordini SET stato = 'consegnato' WHERE $idOrder";
+			$query = "UPDATE ordini SET stato = 'consegnato' WHERE id = {$db->quote($idOrder)}";
 			$db ->query($query);
 		}
 	}

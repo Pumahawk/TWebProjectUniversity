@@ -21,6 +21,6 @@
     <input type="text" class="form-control" id="indirizzo" >
   </div>
   <div class="alert alert-danger" id = "errorMessage" role="alert" hidden="true">...</div>
-        <a href = ""><button type="submit" class="btn btn-default"  >Registrati</button></a>
+        <a href = ""><button type="submit" class="btn btn-primary"  >Registrati</button></a>
 </div></div>
 </form>

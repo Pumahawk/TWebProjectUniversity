@@ -16,7 +16,7 @@
 		 */
 		public static function ofUser($id){
 			$db = Database::connect();
-			$query = "SELECT * FROM ordini WHERE id_utente = $id";
+			$query = "SELECT * FROM ordini WHERE id_utente = $id ORDER BY data ASC";
 			$risp = $db -> query($query);
 			return ($risp -> rowCount() > 0) ? $risp : false;
 		}
@@ -27,7 +27,7 @@
 		 */
 		public static function allOrders(){
 			$db = Database::connect();
-			$query = "SELECT * FROM ordini";
+			$query = "SELECT * FROM ordini ORDER BY data DESC";
 			$risp = $db -> query($query);
 			return ($risp -> rowCount() > 0) ? $risp : false;
 		}

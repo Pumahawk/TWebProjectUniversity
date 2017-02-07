@@ -13,7 +13,7 @@
 			  <a class="list-group-item" data-toggle="collapse" data-target="#collapseExample<?= $i?>"><strong><?=$product["titolo"]?></strong><br><span class = "priceProduct"><?=$product["prezzo"]?></span> &euro;</a>
 			  <div class="collapse" id="collapseExample<?= $i++?>">
 				  <div class="well">
-				    <button class = "btn btn-default removeFromCart" data-id = "<?= $product["id"]?>" >Rimuovi</button>
+				    <button class = "btn btn-danger removeFromCart" data-id = "<?= $product["id"]?>" >Rimuovi</button>
 				  </div>
 			  </div>
 			  <?php 
@@ -28,7 +28,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Torna ai prodotti</button>
-        <button type="button" class="btn btn-primary" id = "byCartButton">Compra</button>
+        <button type="button" class="btn btn-primary" id = "byCartButton" data-trigger="focus"  data-toggle="popover" data-placement="bottom" data-content="Effettuare il login!">Compra</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -62,7 +62,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <a href = "?request=registrationPage"><button type="button" class="btn btn-default"  data-toggle="modal">Registrati</button></a>
+        <a href = "?request=registrationPage"><button type="button" class="btn btn-success"  data-toggle="modal">Registrati</button></a>
         <button type="submit" class="btn btn-primary">Login</button>
       </div>
     </div></form>
