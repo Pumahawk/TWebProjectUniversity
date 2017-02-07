@@ -28,7 +28,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Torna ai prodotti</button>
-        <button type="button" class="btn btn-primary" id = "byCartButton" data-trigger="focus"  data-toggle="popover" data-placement="bottom" data-content="Effettuare il login!">Compra</button>
+        <button type="button" class="btn btn-primary" id = "byCartButton" data-trigger="focus"  data-toggle="popover" data-placement="bottom" data-content="Carrello vuoto oppure effetteate il login!">Compra</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

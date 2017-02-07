@@ -21,7 +21,7 @@
 			$db ->query($query);
 			$idOrd = $db -> lastInsertId();
 			foreach($prdList as $pr){
-				$query = "INSERT INTO venduto (id_ordine, id_prodotto, prezzo) VALUES ({$db->quote($idOrd)}, {$db->quote($pr["id"])}, {$db->quote($pr["prezzo"])}";
+				$query = "INSERT INTO venduto (id_ordine, id_prodotto, prezzo) VALUES ({$db->quote($idOrd)}, {$db->quote($pr["id"])}, {$db->quote($pr["prezzo"])})";
 				$db ->query($query);
 			}
 		}
@@ -38,7 +38,8 @@
 		
 		public static function getUser($idOrder){
 			$db = Database::connect();
-			$query = "SELECT ordini.id, ordini.id_utente WHERE id = {$db->quote($idOrder)}";
-			$db ->query($query);
+			$query = "SELECT utenti.nome as nome, utenti.cognome as cognome, utenti.email as email, utenti.indirizzo as indirizzo, utenti.tipo as tipo FROM utenti, ordini WHERE ordini.id_utente = utenti.id AND ordini.id = {$db->quote($idOrder)}";
+			$risp = $db -> query($query);
+			return ($risp -> rowCount() > 0) ? $risp -> fetch() : false;
 		}
 	}

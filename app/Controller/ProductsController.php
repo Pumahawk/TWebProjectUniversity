@@ -136,6 +136,8 @@ class ProductController{
 		  <a class="list-group-item" data-toggle="collapse">Titolo: <strong><?=$prod["titolo"]?></strong>Prezzo: <strong><?=$prod["prezzo"]?></strong></a>
 		<?php endforeach;
 		?></div>
+		<hr>
+		Consegnare a: <?php $user = Order::getUser($_GET["id"]); echo $user["nome"]?> all'indirizzo: <?= $user["indirizzo"]?>
 		<hr> Totale: <?= $totale?> <?php 
 	}
 	
