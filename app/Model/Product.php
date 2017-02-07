@@ -16,7 +16,7 @@
 		 */
 		public static function ofUser($id){
 			$db = Database::connect();
-			$query = "SELECT * FROM ordini WHERE id_utente = $id ORDER BY data ASC";
+			$query = "SELECT * FROM ordini WHERE id_utente = {$db->quote($id)} ORDER BY data ASC";
 			$risp = $db -> query($query);
 			return ($risp -> rowCount() > 0) ? $risp : false;
 		}
@@ -67,7 +67,7 @@
 		 */
 		public static function getFromId($id){
 			$db = Database::connect();
-			$query = "SELECT * FROM prodotti WHERE prodotti.id = $id";
+			$query = "SELECT * FROM prodotti WHERE prodotti.id = {$db->quote($id)}";
 			return $db -> query($query) -> fetch();;
 		}
 		
@@ -80,7 +80,7 @@
 		 */
 		public static function getFromOrder($idOrdine){
 			$db = Database::connect();
-			$query = "SELECT prodotti.titolo as titolo, venduto.prezzo as prezzo FROM prodotti, venduto WHERE venduto.id_ordine = $idOrdine AND venduto.id_prodotto = prodotti.id";
+			$query = "SELECT prodotti.titolo as titolo, venduto.prezzo as prezzo FROM prodotti, venduto WHERE venduto.id_ordine = {$db->quote($idOrdine)} AND venduto.id_prodotto = prodotti.id";
 			return $db -> query($query);
 		}
 	}

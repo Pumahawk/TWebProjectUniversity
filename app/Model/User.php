@@ -41,7 +41,7 @@
 		 */
 		public static function editUser($id, $nome, $cognome, $email, $indirizzo){
 			$db = Database::connect();
-			$query = "UPDATE utenti SET nome = ".$db -> quote($nome).",  cognome = ".$db -> quote($cognome).", email = ".$db -> quote($email).", indirizzo = ".$db -> quote($indirizzo)." WHERE id = ".$id;
+			$query = "UPDATE utenti SET nome = ".$db -> quote($nome).",  cognome = ".$db -> quote($cognome).", email = ".$db -> quote($email).", indirizzo = ".$db -> quote($indirizzo)." WHERE id = ".$db->quote($id);
 			$risp = $db -> query($query);
 			if($risp){
 			}
@@ -56,7 +56,7 @@
 		 */
 		public static function getById($id){
 			$db = Database::connect();
-			$query = "SELECT * FROM utenti WHERE id = $id";
+			$query = "SELECT * FROM utenti WHERE id = {$db->quote($id)}";
 			$risp = $db -> query($query);
 			return ($risp -> rowCount() > 0) ? $risp -> fetch() : false;
 		}
