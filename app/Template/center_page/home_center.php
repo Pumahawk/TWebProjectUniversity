@@ -4,7 +4,7 @@
 			<div class="thumbnail "> 
 			<img alt="100%x200" data-src="holder.js/100%x200" src="?request=openImg&img=<?= $pr["immagine"]?>" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;"> 
 			<div class="caption"> <h3><?= $pr["titolo"]?></h3> 
-			<p><a href="#" class="btn btn-primary btn-visualizza-prodotto" data-toggle="modal" data-target="#productView"  data-id = "<?= $pr["id"] ?>" role="button">Guarda</a></p> </div> </div>
+			<p><a class="btn btn-primary btn-visualizza-prodotto"  data-target="#productView"  data-id = "<?= $pr["id"] ?>" role="button">Guarda</a></p> </div> </div>
 		</div>
 	<?php endforeach;?>
 </div>

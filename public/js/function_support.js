@@ -21,6 +21,7 @@ class Product{
 			$("#productView #price").html(data["prezzo"])
 			$("#productView #id").html(data["id"]);
 			$("#addToCart").attr("data-id", data["id"]);
+			$('#productView').modal('show');
 		});
 	}
 	
