@@ -16,7 +16,7 @@
 		 */
 		public static function ofUser($id){
 			$db = Database::connect();
-			$query = "SELECT * FROM ordini WHERE id_utente = {$db->quote($id)} ORDER BY data ASC";
+			$query = "SELECT * FROM ordini WHERE id_utente = {$db->quote($id)} ORDER BY data DESC";
 			$risp = $db -> query($query);
 			return ($risp -> rowCount() > 0) ? $risp : false;
 		}
